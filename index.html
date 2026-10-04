@@ -52,7 +52,7 @@ body.dh .btn{background:linear-gradient(135deg,#d40511,#f08c00)}
 .k{font-size:12px;color:var(--mute);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .v{font-size:19px;font-weight:800;margin-top:2px}
 .prices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:520px){.prices,.meta{grid-template-columns:1fr}}
+@media(max-width:520px){.prices{grid-template-columns:1fr}.meta div{padding:10px 12px}.meta .v{font-size:16px;overflow-wrap:anywhere}}
 .p{border-radius:14px;padding:16px;border:1.5px solid var(--line)}
 .p.peak{background:var(--peak);border-color:var(--peakline)}
 .p .num{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-top:4px}
@@ -224,8 +224,8 @@ function go(){
   if(two){
     $('cmp').innerHTML=SUP[cur].map(([n,k])=>{
       const rec=DB.d[k][c],i=rec?rec[0].indexOf(w):-1;
-      if(i<0){const mx=rec?Math.max(...rec[0]):0;return `<div class="sup"><div class="sn">Nhà cung cấp ${n}</div><div class="na">${rec?`Chưa có giá cho mức này (tối đa ${mx} kg)`:'Chưa có giá cho quốc gia này'}</div></div>`}
-      return `<div class="sup"><div class="sn">Nhà cung cấp ${n}</div>
+      if(i<0){const mx=rec?Math.max(...rec[0]):0;return `<div class="sup"><div class="sn">${n}</div><div class="na">${rec?`Chưa có giá cho mức này (tối đa ${mx} kg)`:'Chưa có giá cho quốc gia này'}</div></div>`}
+      return `<div class="sup"><div class="sn">${n}</div>
         <div class="p"><div class="k">Giá ngày thường</div><div class="num">${fmt(rec[1][i])}</div><div class="vnd">${vnd(rec[3][i])}</div></div>
         <div class="p peak"><div class="k">Giá mùa cao điểm</div><div class="num">${fmt(rec[2][i])}</div><div class="vnd">${vnd(rec[2][i]*25000)}</div><span class="note">Tỉ giá 25 + PPMCĐ</span></div></div>`}).join('');
   }else{
